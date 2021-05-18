@@ -2,40 +2,50 @@
 # Run application by docker:
 Ref: https://www.youtube.com/watch?v=fvEWoy1xOvo
 1) Create application with actuator endpoints and spring security and make endpoints open for all
+
 ⦁		To create actuator endpoints with spring secutrity add below dependecyin pom
-		<dependency>
+	`	<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-actuator</artifactId>
-		</dependency>
+		</dependency>`
+		
 ⦁	Add below dependency for spring security
-		<dependency>
+	`	<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-security</artifactId>
 		</dependency>
+`
 
 ⦁	Add bean to expose the actuator endpoints
-	@Bean
+`	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 	http.requestMatcher(EndpointRequest.toAnyEndpoint()).authorizeRequests((requests) ->
 			requests.anyRequest().permitAll());
 	http.httpBasic();
 	return http.build();
 }
+`
 ⦁	make final name in plugin configuration with which you want to create Jar file
-		<finalName>login-manager</finalName>
+`		<finalName>login-manager</finalName> `
+
 2) Run the above file in docker.
+
 ⦁	Add file in project with docker.yml
+
 ⦁	In docker.yml define details like from which java version it need to run as mentioned below
 		FROM openjdk:8
 		ADD target/login-manager.jar login-manager.jar
 		EXPOSE 8086
 		ENTRYPOINT ["java","-jar","login-manager.jar"]
+
 ⦁	add Image todocker repo onlocal with tag name, run below commandon terminal
 	docker build . -t login-manager
+
 ⦁	Run below command to run docker file
 		docker run -p 8086:8086 --name loginManager -d login-manager
 		loginManager is name for your application in docker
 		login-manager is image name
+
 ⦁	Run http://localhost:8086/actuator
 -----------------------------------------------
 To run front end on nginx docker
