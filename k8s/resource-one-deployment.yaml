@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: resource-one-deployment
+  name: resource-one-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: resource-one-deployment
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: resource-one-deployment
+    spec:
+      containers:
+      - image: resource-one
+        name: resource-one-pod
+        imagePullPolicy: Never
+        ports:
+        - containerPort: 8087
+        

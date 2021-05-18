@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: idea-fe-deployment
+  name: ideafedeployment
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: idea-fe-deployment
+  template:
+    metadata:
+      labels:
+        app: idea-fe-deployment
+    spec:
+      containers:
+      - image: idea-fe
+        name: idea-fe-pod
+        imagePullPolicy: Never
+
+        ports:
+        - containerPort: 80

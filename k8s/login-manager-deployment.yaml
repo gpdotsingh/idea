@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: login-manager-deployment
+  name: loginmanagerdeployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: login-manager-deployment
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: login-manager-deployment
+    spec:
+      containers:
+      - image: login-manager
+        name: login-manager-pod
+        imagePullPolicy: Never
+        ports:
+        - containerPort: 8086
+
