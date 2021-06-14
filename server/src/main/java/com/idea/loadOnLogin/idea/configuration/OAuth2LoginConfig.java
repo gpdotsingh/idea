@@ -1,5 +1,7 @@
 package com.idea.loadOnLogin.idea.configuration;
 
+import com.idea.loadOnLogin.idea.model.Oauth2SecurityMap;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.oauth2.client.registration.ClientRegistration;
@@ -10,13 +12,21 @@ import org.springframework.security.oauth2.core.AuthorizationGrantType;
 @Configuration
 public class OAuth2LoginConfig {
 
+    @Autowired
+    Oauth2SecurityMap oauth2SecurityMap;
+
     @Bean
     public ClientRegistrationRepository clientRegistrationRepository() {
         return new InMemoryClientRegistrationRepository(this.clientRegistration());
     }
 
     private ClientRegistration[] clientRegistration() {
+
+   //     oauth2SecurityMap.getClientRegistrations().keySet();
+
         ClientRegistration [] crArray = new ClientRegistration[2];
+
+
 
         ClientRegistration cr1 =
                 ClientRegistration.withRegistrationId("cognito1")

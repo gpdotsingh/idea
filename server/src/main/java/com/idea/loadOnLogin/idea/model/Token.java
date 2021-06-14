@@ -8,6 +8,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Token {
-    
-    private String token;
+    private String id_token;
+    private String access_token;
+    private String refresh_token;
+    private float expires_in;
+    private String token_type;
 }

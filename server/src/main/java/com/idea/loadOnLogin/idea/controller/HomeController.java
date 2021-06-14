@@ -22,12 +22,15 @@ public class HomeController {
          System.out.println("Debug karo");
     }
 
-    @RequestMapping(value = "/authenticationPrincipal",method = RequestMethod.GET)
-    public ResponseEntity<Token> getAccessToken(@AuthenticationPrincipal OidcUser authentication){
+ @RequestMapping(value = "/authenticationPrincipal",method = RequestMethod.GET)
+    public ResponseEntity<String> getAccessToken(@AuthenticationPrincipal OidcUser authentication){
 
         System.out.println(authentication);
         System.out.println("Debug karo");
 
-        return new ResponseEntity<>(new Token(authentication.getIdToken().getTokenValue()), HttpStatus.ACCEPTED);
+        return new ResponseEntity(authentication.getIdToken().getTokenValue(), HttpStatus.ACCEPTED);
     }
+
+
+
 }
