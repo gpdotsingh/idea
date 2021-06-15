@@ -59,21 +59,22 @@ public class WebConfigurer extends WebSecurityConfigurerAdapter {
     //hence the cors need to be declared here as well else with application.properties it won't work**
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.csrf().disable()
+                http
+                .csrf().disable()
                 .cors()
                .and()
-
                 .authorizeRequests()
-                .antMatchers("/*")
+                .antMatchers("/oauth2/**","/login**")
                 .permitAll()
                 .anyRequest()
                 .authenticated()
                 .and()
-                .sessionManagement()
-              // .sessionCreationPolicy(SessionCreationPolicy.STATELESS) // started putting jsession id and also stop header gave error from origin 'http://localhost:4200' has been blocked by CORS policy: Response to preflight request doesn't pass access control check:
-               .and() // to over come above problem add cors remove disable and header in cors configuration
+             //   .sessionManagement()
+             //  .sessionCreationPolicy(SessionCreationPolicy.STATELESS) // started putting jsession id and also stop header gave error from origin 'http://localhost:4200' has been blocked by CORS policy: Response to preflight request doesn't pass access control check:
+             //  .and() // to over come above problem add cors remove disable and header in cors configuration
                 .oauth2Login()
                 .successHandler(this::successHandler)
+
                 .defaultSuccessUrl("/",true);
 
         http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);

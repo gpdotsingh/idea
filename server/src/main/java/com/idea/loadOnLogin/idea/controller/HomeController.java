@@ -31,6 +31,10 @@ public class HomeController {
         return new ResponseEntity(authentication.getIdToken().getTokenValue(), HttpStatus.ACCEPTED);
     }
 
-
+    @RequestMapping(value = "/",method = RequestMethod.GET)
+    public void defaultSuccess(HttpServletRequest request, HttpServletResponse response, OAuth2AuthenticationToken authentication){
+        System.out.println(authentication);
+        System.out.println("Debug karo");
+    }
 
 }
